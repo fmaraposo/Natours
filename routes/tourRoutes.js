@@ -8,6 +8,10 @@ have on the url, in this case, is the id */
 
 router.param('id', tourController.checkID)
 
+//create a checkBody middleware function
+//check if the boday contains the name and price property
+//If not, send back 400 (bad request)
+
 /******************
   ROUTES
 *****************/
@@ -15,7 +19,7 @@ router.param('id', tourController.checkID)
 router
     .route('/')
     .get(tourController.getAllTours)
-    .post(tourController.createTour)
+    .post(tourController.checkBody,tourController.createTour) //the first parameter is a middleware function we create to check the body properties.
 
 router
     .route('/:id')
